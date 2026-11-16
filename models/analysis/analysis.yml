@@ -1,0 +1,24 @@
+models:
+  - name: bestseller_by_hour
+    description: "Top-selling SKU or tied SKUs for each hour and product type."
+    columns:
+      - name: sku
+        description: "SKU of the top-selling product."
+        data_tests:
+          - not_null
+      - name: hr
+        description: "Hour of day, from 0 to 23, when the items were sold."
+        data_tests:
+          - not_null
+      - name: product_name
+        description: "Name of the top-selling product."
+      - name: product_type
+        description: "Product category, such as beverage or jaffle."
+        data_tests:
+          - not_null
+      - name: product_descr
+        description: "Description of the top-selling product."
+      - name: total_items_sold
+        description: "Number of items sold for the SKU during the hour."
+      - name: total_revenue
+        description: "Sum of order subtotals associated with the SKU during the hour."

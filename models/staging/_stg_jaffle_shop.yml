@@ -1,0 +1,39 @@
+models:
+  - name: stg_jaffle_shop__raw_items
+    description: "One row item. A linking table to orders"
+    columns:
+      - name: item_id
+        description: "Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: sku
+        description: "the product"
+        data_tests:
+          - not_null
+      - name: order_id
+        description: "the order"
+        data_tests:
+          - not_null
+
+  - name: stg_jaffle_shop__raw_products
+    description: "One row per product."
+    columns:
+      - name: sku          # primary key: unique + not_null
+        data_tests:
+          - unique
+          - not_null
+      - name: product_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["beverage", "jaffle"]
+
+  - name: stg_jaffle_shop__raw_orders.sql
+    description: "One row per order"
+    columns:
+      - name: order_id          # primary key: unique + not_null
+        data_tests:
+          - unique
+          - not_null
+    # your turn: primary key gets unique + not_null

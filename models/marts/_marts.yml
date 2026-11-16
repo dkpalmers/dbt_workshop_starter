@@ -1,0 +1,57 @@
+models:
+  - name: int_item_hours
+    description: "Item-level sales records enriched with product attributes and order timing."
+    columns:
+      - name: sku
+        description: "SKU of the product included in the item record."
+      - name: product_name
+        description: "Name of the product."
+      - name: product_type
+        description: "Product category, such as beverage or jaffle."
+      - name: product_price
+        description: "Listed price of the product."
+      - name: product_descr
+        description: "Description of the product."
+      - name: item_id
+        description: "Unique identifier for the item record."
+        data_tests:
+          - unique
+          - not_null
+      - name: ordered_at
+        description: "Timestamp when the containing order was placed."
+      - name: ordered_date
+        description: "Date when the containing order was placed."
+      - name: order_subtotal
+        description: "Subtotal of the order containing the item."
+      - name: hr
+        description: "Hour of day, from 0 to 23, when the order was placed."
+
+  - name: dim_item_by_hr
+    description: "Product attributes and order hour for each item-level sales record."
+    columns:
+      - name: sku
+        description: "SKU of the product included in the item record."
+      - name: hr
+        description: "Hour of day, from 0 to 23, when the order was placed."
+      - name: product_name
+        description: "Name of the product."
+      - name: product_type
+        description: "Product category, such as beverage or jaffle."
+      - name: product_descr
+        description: "Description of the product."
+
+  - name: fct_count_item_by_hr
+    description: "Sales metrics aggregated by product SKU and hour of day."
+    columns:
+      - name: sku
+        description: "SKU of the product sold."
+        data_tests:
+          - not_null
+      - name: hr
+        description: "Hour of day, from 0 to 23, when the items were sold."
+        data_tests:
+          - not_null
+      - name: total_items_sold
+        description: "Number of item records sold for the SKU during the hour."
+      - name: total_revenue
+        description: "Sum of order subtotals for the SKU's item records during the hour."
